@@ -1,1 +1,1 @@
-# Alogyrtmy-i-Struktury-Danych
+# Alogrytmy-i-Struktury-Danych
