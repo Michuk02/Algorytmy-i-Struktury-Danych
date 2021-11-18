@@ -8,10 +8,9 @@ Przyklad:
 #include <iostream>
 #include <fstream>
 #include <chrono>
-
+#include <cstdlib>
 using namespace std;
 //zapisywanie elementow tablicy
-
 //deklarowanie zmiennych globalnych
 //stała wartość c
 const int c = 100;
@@ -25,28 +24,24 @@ void DodajAktualnaKombinacje(int a, int j, int k);
 
 int main()
 {
+    ofstream zapis;
+    zapis.open("wyniki.txt");//utworzenie pliku tekstowego
+    srand(time(NULL)); //funkcja, oznaczająca początek generacji liczb
     // czas rozpoczęcia pracy programu
     auto start = chrono::high_resolution_clock::now();
-    ofstream zapis("wyniki.txt");
     //rozmiar głównej tablicy
-    const int n = 8;
+    const int n = 10;
     //inicjalizacja zmiennych
-    int M, ilosc = 0;
+    int ilosc = 0;
     //inicjalizacja tablicy
     int A[n];
-    cout << "podaj elementy tablicy " << endl;
     for (int i = 0; i < n; i++)
     {
-        cin >> A[i];//wpisywanie liczb do tablicy
+        A[i]=rand()%10; //wygenerowanie n liczb od 0 do 9
+        cout << A[i]<<" "<<endl;
     }
-    cout << "Tablica A: " << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << A[i] << " ";//wyswietlenie liczb tablicy
-    }
-    cout << endl;
-    cout << "Podaj liczbe M: " << endl;//podanie liczby M
-    cin >> M;
+    int M = std::rand() %20;
+    cout <<"Liczba M to: "<<M<<endl;
     for (int i = 0; i < n; i++)
     {
         for (int j = i + 1; j < n; j++)
@@ -67,9 +62,8 @@ int main()
     }
     zapis <<"Ilosc kombinacji wynosi: "<< ilosc << endl;//Podanie ilości znalezionych kombinacji
     cout <<"Wyniki zapisano w pliku tekstowym wyniki.txt"<<endl;
-    zapis.close ();
-    // czas zakończenia pracy programu
-    auto finish = std::chrono::high_resolution_clock::now();
+    zapis.close ();// zapis do pliku
+    auto finish = std::chrono::high_resolution_clock::now();// czas zakończenia pracy programu
     chrono::duration<double> elapsed = finish - start;  //obliczenie czasu pracy programu
     cout << "Czas trwania: " << elapsed.count() << " s\n"; //wyświetlenie czasu pracy programu
 }
